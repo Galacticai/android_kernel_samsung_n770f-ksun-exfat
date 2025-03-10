@@ -60,5 +60,6 @@ compile_commands.json
 buildtools/
 buildtootls/
 rkp_cfp/tmp/
+AIK/
 Python*/
 Python*.gz
