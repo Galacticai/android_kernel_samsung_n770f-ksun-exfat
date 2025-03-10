@@ -1,3 +1,64 @@
+
+# General
+*.log
+*.tmp
+*.swp
+*.bak
+*.swp
+*.swo
+
+# Object files
+*.o
+*.a
+*.so
+*.ko
+
+# Compiled kernel modules
+*.ko
+
+# Binary files
+*.bin
+*.img
+*.elf
+
+# Dependency files
+*.d
+
+# Android-specific build files
+out/
+target/
+obj/
+lib/
+debug/
+.release/
+module/
+
+# Build directories
+build/
+*.out
+*.deps
+
+# CMake and Makefiles
+CMakeCache.txt
+CMakeFiles/
+Makefile*
+cmake_install.cmake
+compile_commands.json
+
+# Generated files
+*.dSYM/
+
+# Git LFS (if you are using Large File Storage)
+*.tar
+*.tgz
+
+# Misc
+*~
+*.sublime-workspace
+*.sublime-project
+.vscode/
 buildtools/
 buildtootls/
 rkp_cfp/tmp/
+Python*/
+Python*.gz
