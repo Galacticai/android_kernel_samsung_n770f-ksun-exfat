@@ -1,20 +1,17 @@
 # kernel_samsung_N770F
 
-KernelSU-Next Compatible kernel for samsung galaxy note 10 lite
+KernelSU-Next Compatible kernel for samsung galaxy note 10 lite *with exFAT support (WIP)*
 
-# Installation steps:
+## Installation steps
 
-Back up all previous modules (they will be permanently deleted once you install KernelSU-Next)
+- Back up all previous modules (they will be permanently deleted once you install KernelSU-Next)
+- Download the latest [boot.img](https://github.com/bavalucket/android_kernel_samsung_n770f/releases/) (by [bavalucket](https://github.com/bavalucket) - no exFAT)
+  - [WIP: exFAT support](https://github.com/galacticai/android_kernel_samsung_n770f-ksun-exfat/releases/)
+- Flash it through TWRP/Odin/heimdall/...
+- *(Recommended)* clear cache and dalvik art
+- Enjoy!
 
-Download the latest [boot.img](https://github.com/bavalucket/android_kernel_samsung_n770f/releases/)
-
-Flash it through TWRP/Odin/heimdall/...
-
-recommended: clear cache and dalvik art
-
-Enjoy!
-
-## Notes
+### Notes
 
 🔴: Fatal, 🟡: Not advised, 🟢: Permissible.
 
@@ -24,44 +21,37 @@ Enjoy!
 
 🟢: (DEV) get_cred_rcu() is [bypassed](https://github.com/bavalucket/KernelSU-Next/commit/a55b01ca98602f26f856d2dabb086a880cec26b9) rather than ported
 
-
-
-# Compilation:
+## Compilation
 
 Clone the repo using the "--recurse-submodules" flag
 
-```
-git clone --recurse-submodules https://github.com/bavalucket/android_kernel_samsung_n770f.git
+```bash
+git clone --recurse-submodules https://github.com/galacticai/android_kernel_samsung_n770f-ksun-exfat.git
 ```
 
-and then CD into the directory & run the automated 'build_kernel.sh'
+and then CD into the directory & run the automated `build_kernel.sh`
 
-```
+```bash
 bash build_kernel.sh
 ```
-## Notes:
+
+### Notes
 
 - No patch history - not yet added
+- `setup_repos.sh` might fail due to an HTTP/2 error, in which case you should rerun the script
 
-- "setup_repos.sh" might fail due to an HTTP/2 error, in which case you should rerun the script
-
-```
+```bash
 ./setup_repos.sh
 ```
 
 - **MUST** disable RKP, Uh, and KDP, Otherwise known as "scamsong's b.s."
-
 - Keep in mind overlayfs is unstable
-
 - After successful compilation do the following:
-
 - Copy the Image from arch/arm64/boot/Image
-
 - Paste it into Android Image Kitchen
+- Boot!
 
-- Boot! 
-
-## BUG Reporting & features:
+## BUG Reporting & features
 
 In case of a bug feel free to publish a bug report on this repo.
 
@@ -75,3 +65,4 @@ If you want to request an additional feature feel free to do so.
 - [Diamorphine](https://github.com/m0nad/Diamorphine): some rootkit skills.
 - [KernelSU](https://github.com/tiann/KernelSU): thanks to tiann, or else KernelSU Next wouldn't even exist.
 - [Magic Mount Port](https://github.com/5ec1cff/KernelSU/blob/main/userspace/ksud/src/magic_mount.rs): 💜 5ec1cff for saving KernelSU!
+- [KernelSU-Next for N770F](https://github.com/bavalucket/android_kernel_samsung_n770f)
