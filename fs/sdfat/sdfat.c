@@ -5300,6 +5300,18 @@ static struct file_system_type sdfat_fs_type = {
 	.fs_flags    = FS_REQUIRES_DEV,
 };
 
+static struct file_system_type exfat_fs_type = {
+	.owner       = THIS_MODULE,
+	.name        = "exfat",
+	.mount       = sdfat_fs_mount,
+#ifdef CONFIG_SDFAT_DBG_IOCTL
+	.kill_sb    = sdfat_debug_kill_sb,
+#else
+	.kill_sb    = kill_block_super,
+#endif /* CONFIG_SDFAT_DBG_IOCTL */
+	.fs_flags    = FS_REQUIRES_DEV,
+};
+
 static int __init init_sdfat_fs(void)
 {
 	int err;
@@ -5342,7 +5354,15 @@ static int __init init_sdfat_fs(void)
 		goto error;
 	}
 
+	err = register_filesystem(&exfat_fs_type);
+	if (err) {
+		pr_err("[SDFAT] failed to register exfat filesystem\n");
+		goto error_unregister_sdfat;
+	}
+
 	return 0;
+error_unregister_sdfat:
+	unregister_filesystem(&sdfat_fs_type);
 error:
 	sdfat_uevent_uninit();
 	sdfat_statistics_uninit();
@@ -5379,6 +5399,7 @@ static void __exit exit_sdfat_fs(void)
 	}
 
 	sdfat_destroy_inodecache();
+	unregister_filesystem(&exfat_fs_type);
 	unregister_filesystem(&sdfat_fs_type);
 
 	fsapi_shutdown();
@@ -5390,4 +5411,3 @@ module_exit(exit_sdfat_fs);
 MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("FAT/exFAT filesystem support");
 MODULE_AUTHOR("Samsung Electronics Co., Ltd.");
-
